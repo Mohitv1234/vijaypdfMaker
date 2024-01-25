@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    input{
+        padding: .2rem 1rem;
+        border-radius: 20px;
+        border:1px solid #1e2b33;
+        outline: none;
+    }
+    button{
+        padding: .3rem 1rem;
+        border-radius: 20px;
+        border: 1px solid #1e2b33;
+        background-color: rgb(56, 56, 104);
+        color: white;
+    }
+    .tr{
+        font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e;  line-height: 18px;  vertical-align: top; padding:10px 0;
+    }
+</style>
+<body id="body">
+    <div class="tittle">
+        
+        <textarea name="title" placeholder="Title" id="title" cols="50" rows="2"></textarea>
+        <input type="text" class="dateToday" placeholder="Date">
+        <input type="number" class="order" placeholder="Order">
+        
+        <button id="AddTitle">Add Title</button>
+    </div>
+    <div class="inputs">
+        <input type="text" class="item" placeholder="Items">
+        <input type="number" class="quantity" placeholder="Quantity">
+        <input type="text" class="days" placeholder="Days">
+        <input type="number" class="rate" placeholder="Rate">
+        <input type="text" class="size" placeholder="Size">
+        <button class="button_add">Add Items</button>
+    </div>
+    <div class="main">
+        <main id="makepdf" style="position: relative;" >
+              <!-- Header -->
+              
+              <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable">
+                <tr>
+                  <td height="20"></td>
+                </tr>
+                <tr>
+                  <td>
+                    <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#ffffff" style="border-radius: 10px 10px 0 0;">
+                      <tr class="hiddenMobile">
+                        <td height="40"></td>
+                      </tr>
+                      <tr class="visibleMobile">
+                        <td height="30"></td>
+                      </tr>
+              
+                      <tr>
+                        <td>
+                          <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <table width="220" border="0" cellpadding="0" cellspacing="0" align="left" class="col">
+                                    <tbody>
+                                      <tr>
+                                        <td align="left"> <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Invoice</h1></td>
+                                      </tr>
+                                      <tr class="hiddenMobile">
+                                        <td height="40"></td>
+                                      </tr>
+                                      <tr class="visibleMobile">
+                                        <td height="20"></td>
+                                      </tr>
+                                      <tr>
+                                        <td style="font-size: 12px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; line-height: 18px; vertical-align: top; text-align: left;">
+                                          Bill To
+                                          <span id="titleText"></span>,
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  <table width="220" border="0" cellpadding="0" cellspacing="0" align="right" class="col">
+                                    <tbody>
+                                      <tr class="visibleMobile">
+                                        <td height="20"></td>
+                                      </tr>
+                                      <tr>
+                                        <td height="5"></td>
+                                      </tr>
+                                      <tr>
+
+                                        <td style="font-size: 21px; color: #6e6a1b; letter-spacing: -1px; font-family: 'Open Sans', sans-serif; line-height: 1; vertical-align: top; text-align: right;">
+                                            <img src="WhatsApp_Image_2024-01-23_at_22.02.36_401635cb-removebg-preview.png" width="62" height="42" alt="logo" border="0" />
+                                            <br>
+                                            AD Lable Advertising
+                                          <br><small style="font-size: .8rem;">432, Laxmi Enclave 2, Nr Gajera School Katargam, Surat</small>
+                                          <br><small style="font-size: .7rem;">Mobile Number :- 9512812812</small>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                      <tr class="hiddenMobile">
+                                        <td height="50"></td>
+                                      </tr>
+                                      <tr class="visibleMobile">
+                                        <td height="20"></td>
+                                      </tr>
+                                      <tr>
+                                        <td style="font-size: 12px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; line-height: 18px; vertical-align: top; text-align: right;">
+                                          <small>ORDER: </small> <span id="order"></span><br />
+                                          <small><span id="DateToday"></span></small>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+              <!-- /Header -->
+              <!-- Order Details -->
+              <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable">
+                <tbody>
+                  <tr>
+                    <td>
+                      <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#ffffff">
+                        <tbody>
+                          <tr>
+                          <tr class="hiddenMobile">
+                            <td height="60"></td>
+                          </tr>
+                          <tr class="visibleMobile">
+                            <td height="40"></td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
+                                <thead   style="text-align: center;" >
+                                  <tr>
+                                    <th style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 10px 7px 0;" >
+                                      Item
+                                    </th>
+                                    
+                                    <th style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;" >
+                                      Quantity
+                                    </th>
+                                    <th style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;" >
+                                        Size
+                                      </th>
+                                    <th style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;" >
+
+                                        Days
+                                      </th>
+                                      <th style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;" >
+                                        Rate
+                                      </th>
+                                    <th width="10%" style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #1e2b33; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;" >
+                                      Amount
+                                    </th>
+                                  </tr>
+                                  <tr>
+                                    <td height="1" style="background: #bebebe;" colspan="6"></td>
+                                  </tr>
+                                  <tr>
+                                    <td height="10" colspan="4"></td>
+                                  </tr>
+                                 
+                                
+                                
+                                </thead>
+                                <tbody class="tbodyItems" style="font-size: 12px; text-align: center; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; ">
+
+                                </tbody>
+                              </table>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td height="20"></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- /Order Details -->
+              <!-- Total -->
+              <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" >
+                <tbody>
+                  <tr>
+                    <td>
+                      <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#ffffff">
+                        <tbody>
+                          <tr>
+                            <td>
+              
+                              <!-- Table Total -->
+                              <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
+                                <tbody>
+                                  <tr>
+                                    <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e; line-height: 22px; vertical-align: top; text-align:right; ">
+                                      Total Amount: &nbsp;
+                                    </td>
+                                    <td  id="subtotalitems" style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e; line-height: 22px; vertical-align: top; text-align:right; white-space:nowrap;" width="80">
+                                      <input type="text" style="border: none;" id="subtotalitems" class="input_amount">
+                                    </td>
+                                  </tr>
+                                 
+                                </tbody>
+                              </table>
+                              <!-- /Table Total -->
+              
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- /Total -->
+              <!-- Information -->
+              <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" >
+                <tbody>
+                  <tr>
+                    <td>
+                      <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#ffffff">
+                        <tbody>
+                          <tr>
+                          <tr class="hiddenMobile">
+                            <td height="60"></td>
+                          </tr>
+                          <tr class="visibleMobile">
+                            <td height="40"></td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
+                                <tbody>
+                                  <tr>
+                                    <td>
+                                   
+              
+              
+                                      <table width="220" border="0" cellpadding="0" cellspacing="0" align="left" class="col">
+                                        <tbody>
+                                          <tr class="visibleMobile">
+                                            <td height="20"></td>
+                                          </tr>
+                                          <tr>
+                                            <td style="font-size: 11px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ">
+                                              <strong>Bank Details</strong>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td width="100%" height="10"></td>
+                                          </tr>
+                                          <tr>
+                                            <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ">
+                                              Name: Mr. Alpesh Dudabhai Katariya<br>Bank Name : State Bank of India<br> Account Number: 32489289441<br>IFS Code: SBIN0060182 <br> 
+                                              
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </td>
+                          </tr>
+                          <tr>
+                           
+                          </tr>
+                          <tr class="hiddenMobile">
+                            <td height="60"></td>
+                          </tr>
+                          <tr class="visibleMobile">
+                            <td height="30"></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- /Information -->
+              <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" >
+              
+                <tr>
+                  <td>
+                    <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#ffffff" style="border-radius: 0 0 10px 10px;">
+                      <tr>
+                        <td>
+                          <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
+                            <tbody>
+                              <tr>
+                                <td style="font-size: 12px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; line-height: 18px; vertical-align: top; text-align: left;">
+                                  Have a nice day.
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr class="spacer">
+                        <td height="50"></td>
+                      </tr>
+              
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td height="20"></td>
+                </tr>
+              </table>
+
+
+        </main>
+    </div>
+  
+        <button id="button" style="border-radius: 30px; border: none; margin-top: .4rem; background-color: rgb(0, 64, 64); color: white; padding: .8rem 1.5rem;font-size: 1.3rem; text-transform: capitalize;" >print</button>
+<script>
+     let button = document.getElementById("button");
+    let makepdf = document.getElementById("makepdf");
+ 
+    button.addEventListener("click", function () {
+        let mywindow = window.open("", "PRINT", 
+                "height=400,width=600");
+ 
+        mywindow.document.write(makepdf.innerHTML);
+ 
+        mywindow.document.close();
+        mywindow.focus();
+ 
+        mywindow.print();
+        mywindow.close();
+ 
+        return true;
+    });
+
+    
+</script>
+<script src="Script.js"></script>
+</body> 
+</html>
